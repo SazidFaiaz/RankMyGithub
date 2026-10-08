@@ -1,5 +1,5 @@
 # Deployment
 
-The root Vercel project builds the Vite app and exposes the Express API through a serverless catch-all function. Connect the repository to Vercel, configure Node.js 22+, and add the environment values from `.env.example` in the Vercel project settings. `GITHUB_TOKEN` and `JWT_SECRET` are server-side secrets; never prefix them with `VITE_`.
+Import the repository into Vercel as a Next.js project. The root `package.json` supplies `npm run build`; Vercel serves App Router pages and API Route Handlers from the same deployment. Configure Node.js 20.9+ and add `GITHUB_TOKEN` only as a server-side environment secret if authenticated GitHub API limits are needed.
 
-The API cache in this release is process-local and does not provide cross-instance persistence. MongoDB Atlas storage, production cache behavior, security review, and deployed smoke tests are not complete yet. Do not consider this scaffold production-ready until those phases are complete and verified.
+No database service is required for this version. The process-local cache is best-effort and is not shared between serverless instances. Add a shared cache/rate-limit store before relying on global consistency at production scale.
