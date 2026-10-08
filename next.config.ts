@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  transpilePackages: ["@gitrate/scoring-engine"],
   async headers() {
     return [{
       source: "/:path*",
