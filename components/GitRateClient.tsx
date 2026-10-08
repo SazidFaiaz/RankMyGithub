@@ -2,10 +2,11 @@
 
 import { useState, type CSSProperties, type FormEvent } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowDownRight, ArrowRight, ArrowUpRight, BadgeCheck, BookOpen, GitFork, Github, Globe2, Layers3, LoaderCircle, Share2, Sparkles, Star, UsersRound } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ArrowUpRight, BadgeCheck, BookOpen, GitFork, Github, Globe2, Layers3, LoaderCircle, Moon, Share2, Sparkles, Star, Sun, UsersRound } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { ProfileScore } from "@gitrate/scoring-engine";
+import { useTheme } from "@/components/Providers";
 
 interface Repository {
   name: string;
@@ -76,7 +77,9 @@ function SearchForm({ initial = "" }: { initial?: string }) {
 }
 
 function Header() {
-  return <header className="topbar"><Link href="/" className="brand"><span className="brand-mark"><Github size={20} /></span>gitrate<span className="brand-period">.</span></Link><nav aria-label="Main navigation"><a href="/#method">Methodology</a><Link href="/compare">Compare</Link><a href="https://github.com" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={19} /></a></nav></header>;
+  const { resolvedTheme, ready, toggleTheme } = useTheme();
+  const nextTheme = resolvedTheme === "dark" ? "light" : "dark";
+  return <header className="topbar"><Link href="/" className="brand"><span className="brand-mark"><Github size={20} /></span>gitrate<span className="brand-period">.</span></Link><nav aria-label="Main navigation"><a href="/#method">Methodology</a><Link href="/compare">Compare</Link><button className="theme-toggle" type="button" onClick={toggleTheme} disabled={!ready} aria-label={ready ? `Switch to ${nextTheme} mode` : "Theme preference loading"} title={ready ? `Switch to ${nextTheme} mode` : "Theme preference loading"}>{resolvedTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />}</button><a href="https://github.com" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={19} /></a></nav></header>;
 }
 
 function Home() {
