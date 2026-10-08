@@ -11,5 +11,5 @@
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
-  "devDependencies": { "vitest": "^3.2.4" }
+  "devDependencies": { "vitest": "^5.0.3" }
 }

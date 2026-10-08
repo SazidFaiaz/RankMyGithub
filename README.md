@@ -43,6 +43,9 @@ npm run typecheck
 ## API
 
 - `GET /api/health`
+- `GET /api/github/:username`
+- `GET /api/github/:username/repositories`
+- `GET /api/github/:username/activity`
 - `GET /api/analysis/:username` (also accepts a GitHub profile URL)
 - `GET /api/compare/:username1/:username2`
 - `GET /api/badge/:username` (SVG)

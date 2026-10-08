@@ -34,6 +34,60 @@ app.get("/api/analysis/:username", analysisLimit, async (request, response, next
   }
 });
 
+app.get("/api/github/:username", analysisLimit, async (request, response, next) => {
+  try {
+    const parsed = usernameSchema.safeParse(request.params);
+    if (!parsed.success) {
+      response.status(400).json({ success: false, error: { code: "INVALID_USERNAME", message: "Enter a valid GitHub username." } });
+      return;
+    }
+    const result = await getAnalyzedProfile(parsed.data.username);
+    response.json({ success: true, data: result.profile });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.get("/api/github/:username/repositories", analysisLimit, async (request, response, next) => {
+  try {
+    const parsed = usernameSchema.safeParse(request.params);
+    if (!parsed.success) {
+      response.status(400).json({ success: false, error: { code: "INVALID_USERNAME", message: "Enter a valid GitHub username." } });
+      return;
+    }
+    const result = await getAnalyzedProfile(parsed.data.username);
+    response.json({ success: true, data: result.repositories });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.get("/api/github/:username/activity", analysisLimit, async (request, response, next) => {
+  try {
+    const parsed = usernameSchema.safeParse(request.params);
+    if (!parsed.success) {
+      response.status(400).json({ success: false, error: { code: "INVALID_USERNAME", message: "Enter a valid GitHub username." } });
+      return;
+    }
+    const result = await getAnalyzedProfile(parsed.data.username);
+    const cutoff = Date.now() - 365 * 24 * 60 * 60 * 1000;
+    const updatedRepositories = result.repositories
+      .filter((repository) => repository.pushedAt && Date.parse(repository.pushedAt) >= cutoff)
+      .map(({ name, pushedAt }) => ({ name, pushedAt }));
+    response.json({
+      success: true,
+      data: {
+        updatedRepositories,
+        commits: null,
+        activeWeeks: null,
+        explanation: "Commit totals and contribution weeks are not available through the public API calls used by GitRate.",
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.get("/api/compare/:username1/:username2", rateLimit({ windowMs: 60_000, limit: 10, standardHeaders: "draft-8", legacyHeaders: false }), async (request, response, next) => {
   try {
     const names = z.object({ username1: z.string().min(1).max(100), username2: z.string().min(1).max(100) }).safeParse(request.params);

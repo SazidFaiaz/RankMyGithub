@@ -6,6 +6,10 @@ Base path: `/api`
 
 Returns service health in the standard success envelope.
 
+## `GET /github/:username`, `/github/:username/repositories`, `/github/:username/activity`
+
+Return normalized profile and repository data. Activity includes observed recent repository update dates; commit totals and active contribution weeks are `null` because the API access used here does not provide them reliably.
+
 ## `GET /analysis/:username`
 
 Accepts a GitHub login or a GitHub profile URL. Returns normalized public profile data, the 100 most recently updated public repositories, and a server-computed score with version/category evidence. The process-local cache TTL is 30 minutes. This route is limited to 20 requests per minute per IP.

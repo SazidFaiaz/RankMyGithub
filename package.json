@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "concurrently -k -n api,web \"npm:dev --workspace @gitrate/api\" \"npm:dev --workspace @gitrate/web\"",
     "build": "npm run build --workspace @gitrate/scoring-engine && npm run build --workspace @gitrate/api && npm run build --workspace @gitrate/web",
-    "test": "npm run test --workspace @gitrate/scoring-engine",
+    "test": "npm run build --workspace @gitrate/scoring-engine && npm run test --workspaces --if-present",
     "lint": "eslint apps packages --max-warnings=0",
     "typecheck": "npm run typecheck --workspace @gitrate/scoring-engine && npm run typecheck --workspace @gitrate/api && npm run typecheck --workspace @gitrate/web",
     "format": "prettier --write .",
