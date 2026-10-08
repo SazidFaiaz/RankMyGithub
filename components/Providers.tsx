@@ -66,7 +66,10 @@ export function Providers({ children }: { children: ReactNode }) {
     const nextTheme = resolvedTheme === "dark" ? "light" : "dark";
     try {
       window.localStorage.setItem("gitrate-theme", nextTheme);
-    } catch {}
+    } catch {
+      setTheme(nextTheme);
+      return;
+    }
     setTheme(nextTheme);
   };
 
