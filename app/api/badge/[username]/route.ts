@@ -1,4 +1,4 @@
-import { calculateScore } from "@gitrate/scoring-engine";
+import { calculateScore } from "@/packages/scoring-engine/src";
 import { errorResponse } from "@/lib/api-response";
 import { getAnalyzedProfile } from "@/lib/github";
 

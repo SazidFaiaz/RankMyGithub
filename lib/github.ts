@@ -1,5 +1,5 @@
 import { Octokit } from "@octokit/rest";
-import type { ProfileMetrics, RepositoryMetric } from "@gitrate/scoring-engine";
+import type { ProfileMetrics, RepositoryMetric } from "@/packages/scoring-engine/src";
 
 const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN || undefined,

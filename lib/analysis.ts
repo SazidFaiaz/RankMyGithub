@@ -1,4 +1,4 @@
-import { calculateScore } from "@gitrate/scoring-engine";
+import { calculateScore } from "@/packages/scoring-engine/src";
 import { getAnalyzedProfile } from "./github";
 
 export async function getProfileReport(username: string) {

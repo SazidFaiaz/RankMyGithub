@@ -1,4 +1,4 @@
-import { calculateScore } from "@gitrate/scoring-engine";
+import { calculateScore } from "@/packages/scoring-engine/src";
 import { z } from "zod";
 import { errorResponse } from "@/lib/api-response";
 import { getAnalyzedProfile, normalizeUsername } from "@/lib/github";

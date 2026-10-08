@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ArrowDownRight, ArrowRight, ArrowUpRight, BadgeCheck, BookOpen, GitFork, Github, Globe2, Layers3, LoaderCircle, Moon, Share2, Sparkles, Star, Sun, UsersRound } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import type { ProfileScore } from "@gitrate/scoring-engine";
+import type { ProfileScore } from "@/packages/scoring-engine/src";
 import { useTheme } from "@/components/Providers";
 
 interface Repository {
